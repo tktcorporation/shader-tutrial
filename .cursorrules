@@ -1,0 +1,26 @@
+# shadcn instructions
+
+Use the latest version of Shadcn to install new components, like this command to add a button component:
+
+```bash
+pnpx shadcn@latest add button
+```
+
+# project structure
+"projectName": "shader-tutrial",
+"mode": "file-router",
+"typescript": true,
+"tailwind": true,
+"packageManager": "pnpm",
+"git": true,
+"version": 1,
+"framework": "react-cra",
+"chosenAddOns": [
+    "biome",
+    "netlify",
+    "shadcn",
+    "t3env",
+    "tRPC",
+    "tanstack-query",
+    "start"
+]
