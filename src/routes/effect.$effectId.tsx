@@ -1,7 +1,7 @@
 import { createFileRoute, useParams } from '@tanstack/react-router';
-import EffectViewer from '../../components/EffectViewer';
+import EffectViewer from '../components/EffectViewer.tsx';
 // Temporary: Import mock data to simulate fetching effect details
-import { mockEffects } from '../../components/EffectFeed'; // Adjust path if needed
+import { mockEffects } from '../components/EffectFeed.tsx'; // Adjust path if needed
 
 export const Route = createFileRoute('/effect/$effectId')({
   component: EffectViewerComponent,
