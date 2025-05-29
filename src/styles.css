@@ -136,3 +136,52 @@ code {
     @apply bg-background text-foreground;
   }
 }
+
+/* Add to src/styles.css */
+.effect-feed-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Default 2 columns for mobile */
+  gap: 16px; /* Adjust gap as needed */
+  padding: 16px; /* Add some padding around the container */
+}
+
+/* Media query for larger screens (e.g., tablets and desktops) */
+@media (min-width: 768px) {
+  .effect-feed-container {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns for larger screens */
+  }
+}
+
+.effect-card {
+  border: 1px solid #eee; /* Example border */
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  /* Add other styling for the card itself as needed */
+  /* Ensure images inside the card are responsive */
+}
+
+.effect-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.effect-card h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 1.1em;
+}
+
+.effect-card p {
+  font-size: 0.9em;
+  color: #555;
+}
+
+/* Add to src/styles.css */
+.effect-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block; /* Ensures the link takes up the card's space for clicking */
+}
