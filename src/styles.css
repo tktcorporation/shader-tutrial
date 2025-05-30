@@ -140,43 +140,61 @@ code {
 /* Add to src/styles.css */
 .effect-feed-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Default 2 columns for mobile */
-  gap: 16px; /* Adjust gap as needed */
-  padding: 16px; /* Add some padding around the container */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive columns */
+  gap: 24px; /* Increased gap */
+  padding: 24px; /* Increased padding */
+  /* background-color: var(--muted, #f8f9fa); /* Optional: subtle background for the feed area */
 }
 
-/* Media query for larger screens (e.g., tablets and desktops) */
-@media (min-width: 768px) {
+/* Media query for very small screens, if needed, though auto-fill handles a lot */
+/* @media (max-width: 600px) {
   .effect-feed-container {
-    grid-template-columns: repeat(4, 1fr); /* 4 columns for larger screens */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 16px;
   }
-}
+} */
 
 .effect-card {
-  border: 1px solid #eee; /* Example border */
-  padding: 12px;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  /* Add other styling for the card itself as needed */
-  /* Ensure images inside the card are responsive */
+  background-color: var(--card, #ffffff);
+  border: 1px solid var(--border, #e0e0e0); /* Subtle border */
+  border-radius: 12px; /* Softer corners */
+  padding: 16px; /* Adjusted padding */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* "Lifted" effect */
+  transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+  display: flex; /* For better internal alignment if needed */
+  flex-direction: column; /* Stack image, title, description */
+}
+
+.effect-card:hover {
+  transform: translateY(-6px) scale(1.03); /* Slight scale up and lift */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12); /* Brighter shadow on hover */
 }
 
 .effect-card img {
   max-width: 100%;
-  height: auto;
-  border-radius: 4px;
-  margin-bottom: 8px;
+  height: 150px; /* Fixed height for image consistency */
+  object-fit: cover; /* Ensure image covers the area */
+  border-radius: 8px; /* Rounded corners for the image */
+  margin-bottom: 12px; /* Space between image and title */
+  /* border: 1px solid var(--border, #eee); /* Optional subtle border for image */
 }
 
 .effect-card h3 {
+  font-size: 1.25em; /* Slightly larger title */
+  font-weight: 600; /* Bolder title */
+  color: var(--foreground, #212529);
   margin-top: 0;
-  margin-bottom: 8px;
-  font-size: 1.1em;
+  margin-bottom: 10px; /* Space between title and description */
+  line-height: 1.3;
 }
 
 .effect-card p {
   font-size: 0.9em;
-  color: #555;
+  color: var(--muted-foreground, #6c757d); /* Muted color for description */
+  line-height: 1.5; /* Improved readability */
+  flex-grow: 1; /* Allows description to take available space if card heights vary */
+  margin-bottom: 0; /* Remove bottom margin if it's the last element */
 }
 
 /* Add to src/styles.css */
@@ -184,4 +202,171 @@ code {
   text-decoration: none;
   color: inherit;
   display: block; /* Ensures the link takes up the card's space for clicking */
+}
+
+/* --- UI Enhancements for EffectViewer and ParamGUI --- */
+
+/* EffectViewer Right Panel */
+.effect-viewer-panel {
+  background-color: var(--card, #ffffff); /* Use CSS var or fallback */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Space between title, details, and ParamGUI */
+}
+
+.effect-viewer-panel h2 {
+  font-size: 1.8em;
+  font-weight: 600;
+  color: var(--foreground, #333);
+  margin-bottom: 0px; /* Reduced margin */
+}
+
+.effect-viewer-panel .effect-details {
+  font-size: 0.85em;
+  color: var(--muted-foreground, #555);
+  background-color: var(--muted, #f0f0f0);
+  padding: 8px 12px;
+  border-radius: 4px;
+  line-height: 1.4;
+}
+
+/* ParamGUI Container */
+.param-gui-container {
+  background-color: var(--background, #f9f9f9); /* Slightly different from panel for depth */
+  padding: 18px;
+  border-radius: 6px;
+  /* border: 1px solid var(--border, #e0e0e0); No longer using dashed border */
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.param-gui-container h2 {
+  font-size: 1.3em;
+  font-weight: 500;
+  color: var(--foreground, #333);
+  margin-top: 0;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--border, #e0e0e0);
+  padding-bottom: 10px;
+}
+
+/* ParamGUI Input Groups */
+.param-gui-input-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column; /* Stack label and control */
+  gap: 8px; /* Space between label and control+value */
+}
+
+.param-gui-label {
+  font-size: 0.95em;
+  font-weight: 500;
+  color: var(--foreground, #444);
+  margin-bottom: 0px; /* Adjusted due to flex gap */
+}
+
+.param-gui-control-row {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between control and value display */
+}
+
+.param-gui-range-slider {
+  flex-grow: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  background: var(--muted, #ddd);
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+.param-gui-range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: var(--primary, #007bff);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+
+.param-gui-range-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: var(--primary, #007bff);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none; /* Important for Firefox */
+  box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+
+.param-gui-color-picker {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 40px; /* Fixed width */
+  height: 28px;
+  border: 1px solid var(--border, #ccc);
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0; /* Remove default padding for some browsers */
+}
+/* Consistent styling for color picker thumb */
+.param-gui-color-picker::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border-radius: 3px;
+}
+.param-gui-color-picker::-webkit-color-swatch {
+  border: none;
+  border-radius: 3px;
+}
+.param-gui-color-picker::-moz-color-swatch { /* For Firefox */
+  border: none;
+  border-radius: 3px;
+}
+
+
+.param-gui-value-display {
+  font-size: 0.9em;
+  color: var(--secondary-foreground, #333);
+  background-color: var(--muted, #e9ecef);
+  padding: 4px 8px;
+  border-radius: 4px;
+  min-width: 50px; /* Ensure some space */
+  text-align: center;
+}
+
+.param-gui-button {
+  background-color: var(--primary, #007bff);
+  color: var(--primary-foreground, white);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.95em;
+  font-weight: 500;
+  transition: background-color 0.2s ease-in-out;
+  width: 100%; /* Make button full width of its container */
+  margin-top: 10px; /* Add some space above the button */
+}
+
+.param-gui-button:hover {
+  background-color: oklch(from var(--primary) calc(l - 0.05) c h); /* Darken primary color on hover */
+}
+
+/* Ensure canvas container in EffectViewer is well-defined */
+.effect-viewer-canvas-container {
+  flex: 0.7; /* As it was */
+  background-color: #000; /* Ensure dark background for canvas */
+  color: white; /* For any text if canvas fails */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 8px; /* Match panel rounding */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Subtle shadow */
 }

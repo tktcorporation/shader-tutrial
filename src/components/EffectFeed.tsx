@@ -7,7 +7,7 @@ export const mockEffects = [ // Exporting for use in other files (temporary)
   {
     id: '1',
     title: 'Fresnel Glow', // For card display
-    imageUrl: 'https://via.placeholder.com/200x100?text=Fresnel',
+    imageUrl: 'https://placehold.co/200x100?text=Fresnel',
     description: 'A shiny outline based on viewing angle.',
     name: 'Fresnel Effect', // For viewer display / more detailed name
     shaderKey: 'fresnel01',
@@ -15,7 +15,7 @@ export const mockEffects = [ // Exporting for use in other files (temporary)
   {
     id: '2',
     title: 'Toon Outline',
-    imageUrl: 'https://via.placeholder.com/200x100?text=Toon',
+    imageUrl: 'https://placehold.co/200x100?text=Toon',
     description: 'Cel-shaded look with outlines.',
     name: 'Toon Shader',
     shaderKey: 'toon01',
@@ -23,7 +23,7 @@ export const mockEffects = [ // Exporting for use in other files (temporary)
   {
     id: '3',
     title: 'Water Ripples',
-    imageUrl: 'https://via.placeholder.com/200x100?text=Water',
+    imageUrl: 'https://placehold.co/200x100?text=Water',
     description: 'Simulates realistic water ripples.',
     name: 'Water Simulation',
     shaderKey: 'waterSim01',
@@ -31,7 +31,7 @@ export const mockEffects = [ // Exporting for use in other files (temporary)
   {
     id: '4',
     title: 'Bright Bloom',
-    imageUrl: 'https://via.placeholder.com/200x100?text=Bloom',
+    imageUrl: 'https://placehold.co/200x100?text=Bloom',
     description: 'Makes bright areas glow.',
     name: 'Bloom Effect',
     shaderKey: 'bloom01',
@@ -39,7 +39,7 @@ export const mockEffects = [ // Exporting for use in other files (temporary)
   {
     id: '5',
     title: 'Particle Burst',
-    imageUrl: 'https://via.placeholder.com/200x100?text=Particles',
+    imageUrl: 'https://placehold.co/200x100?text=Particles',
     description: 'Dynamic particle system.',
     name: 'Particle System',
     shaderKey: 'particles01',
@@ -47,7 +47,7 @@ export const mockEffects = [ // Exporting for use in other files (temporary)
   {
     id: '6',
     title: 'Edge Glow',
-    imageUrl: 'https://via.placeholder.com/200x100?text=RimLight',
+    imageUrl: 'https://placehold.co/200x100?text=RimLight',
     description: 'Highlights object edges.',
     name: 'Rim Lighting',
     shaderKey: 'rimLight01',
@@ -55,7 +55,7 @@ export const mockEffects = [ // Exporting for use in other files (temporary)
   {
     id: '7',
     title: 'Retro Pixels',
-    imageUrl: 'https://via.placeholder.com/200x100?text=Pixelated',
+    imageUrl: 'https://placehold.co/200x100?text=Pixelated',
     description: 'Pixelation for a retro style.',
     name: 'Pixelation Effect',
     shaderKey: 'pixelate01',
@@ -63,7 +63,7 @@ export const mockEffects = [ // Exporting for use in other files (temporary)
   {
     id: '8',
     title: 'CRT Scanlines',
-    imageUrl: 'https://via.placeholder.com/200x100?text=Scanlines',
+    imageUrl: 'https://placehold.co/200x100?text=Scanlines',
     description: 'Old CRT monitor look.',
     name: 'Scanlines Effect',
     shaderKey: 'scanlines01',

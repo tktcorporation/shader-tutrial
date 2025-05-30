@@ -1,48 +1,78 @@
-import React, { useState } from 'react';
-import AhaOverlay from './AhaOverlay'; // Import AhaOverlay
+import React, { useState, useEffect } from 'react';
 
-interface ParamGUIProps {
-  onOpenMiniLesson?: () => void; // New prop, optional for now to avoid breaking if not passed
+export interface ShaderParams {
+  intensity: number;
+  color: string;
+  // Add more params as needed later, e.g. roughness, metalness etc.
 }
 
-const ParamGUI: React.FC<ParamGUIProps> = ({ onOpenMiniLesson }) => { // Destructure new prop
-  const [ahaVisible, setAhaVisible] = useState(false);
-  const [ahaMessage, setAhaMessage] = useState('');
+interface ParamGUIProps {
+  initialParams: ShaderParams;
+  onParamsChange: (newParams: ShaderParams) => void;
+  onOpenMiniLesson?: () => void; // Keep this if it exists
+}
 
-  const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setAhaMessage(`Intensity set to: ${value}. This knob controls the Fresnel strength!`);
-    setAhaVisible(true);
+const ParamGUI: React.FC<ParamGUIProps> = ({ initialParams, onParamsChange, onOpenMiniLesson }) => {
+  const [params, setParams] = useState<ShaderParams>(initialParams);
+
+  useEffect(() => {
+    // If initialParams prop changes, update the internal state
+    setParams(initialParams);
+  }, [initialParams]);
+
+  const handleIntensityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newIntensity = parseFloat(event.target.value);
+    const newParams = { ...params, intensity: newIntensity };
+    setParams(newParams);
+    onParamsChange(newParams);
   };
 
-  const handleOverlayClose = () => {
-    setAhaVisible(false);
+  const handleColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newColor = event.target.value;
+    const newParams = { ...params, color: newColor };
+    setParams(newParams);
+    onParamsChange(newParams);
   };
 
   return (
-    <div style={{ border: '1px dashed #999', padding: '10px', margin: '10px', position: 'relative' /* For AhaOverlay positioning */ }}>
-      <AhaOverlay message={ahaMessage} visible={ahaVisible} onClose={handleOverlayClose} />
-      <h2>Parameters</h2>
-      <p>Shader controls will appear here.</p>
-      <div>
-        <label htmlFor="intensityRange">Intensity: </label>
-        <input
-          type="range"
-          id="intensityRange"
-          min="0"
-          max="1"
-          step="0.01"
-          defaultValue="0.5"
-          onChange={handleSliderChange} // Trigger overlay on change
-        />
+    // Removed inline style, using className now
+    <div className="param-gui-container">
+      <h2>Parameters</h2> {/* Styling handled by .param-gui-container h2 */}
+      
+      <div className="param-gui-input-group">
+        <label htmlFor="intensityRange" className="param-gui-label">Intensity: </label>
+        <div className="param-gui-control-row">
+          <input
+            type="range"
+            id="intensityRange"
+            min="0"
+            max="1"
+            step="0.01"
+            value={params.intensity}
+            onChange={handleIntensityChange}
+            className="param-gui-range-slider" // Applied class
+          />
+          <span className="param-gui-value-display">{params.intensity.toFixed(2)}</span>
+        </div>
       </div>
-      <div>
-        <label htmlFor="colorPicker">Color: </label>
-        <input type="color" id="colorPicker" defaultValue="#ff0000" />
+      
+      <div className="param-gui-input-group">
+        <label htmlFor="colorPicker" className="param-gui-label">Color: </label>
+        <div className="param-gui-control-row">
+          <input
+            type="color"
+            id="colorPicker"
+            value={params.color}
+            onChange={handleColorChange}
+            className="param-gui-color-picker" // Applied class
+          />
+          <span className="param-gui-value-display" style={{ minWidth: '80px' }}>{params.color}</span> {/* Slightly wider for hex */}
+        </div>
       </div>
-      {/* Add button to trigger Mini-Lesson */}
+      
       {onOpenMiniLesson && (
-        <button onClick={onOpenMiniLesson} style={{ marginTop: '10px', padding: '8px 12px', cursor: 'pointer' }}>
+        // Removed inline style, using className now
+        <button onClick={onOpenMiniLesson} className="param-gui-button">
           Learn More (Mini-Lesson)
         </button>
       )}
